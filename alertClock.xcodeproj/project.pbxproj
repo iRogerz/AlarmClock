@@ -7,20 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		359951BC28093E650074A418 /* MainTabberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951BB28093E650074A418 /* MainTabberViewController.swift */; };
+		359951BF28093ED40074A418 /* WorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951BE28093ED40074A418 /* WorldClockViewController.swift */; };
+		359951C328093EFE0074A418 /* StopWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951C228093EFE0074A418 /* StopWatchViewController.swift */; };
+		359951C528093F060074A418 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951C428093F060074A418 /* TimerViewController.swift */; };
+		359951C7280942A10074A418 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951C6280942A10074A418 /* AlarmViewController.swift */; };
+		359951CA280964E90074A418 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 359951C9280964E90074A418 /* SnapKit */; };
+		359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951CD280D5DA40074A418 /* AddAlarmViewController.swift */; };
 		35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C4280924C400031FF7 /* AppDelegate.swift */; };
 		35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C6280924C400031FF7 /* SceneDelegate.swift */; };
 		35D649C9280924C400031FF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C8280924C400031FF7 /* ViewController.swift */; };
-		35D649CC280924C400031FF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35D649CA280924C400031FF7 /* Main.storyboard */; };
 		35D649CE280924C500031FF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D649CD280924C500031FF7 /* Assets.xcassets */; };
 		35D649D1280924C500031FF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35D649CF280924C500031FF7 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		359951BB28093E650074A418 /* MainTabberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabberViewController.swift; sourceTree = "<group>"; };
+		359951BE28093ED40074A418 /* WorldClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockViewController.swift; sourceTree = "<group>"; };
+		359951C228093EFE0074A418 /* StopWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchViewController.swift; sourceTree = "<group>"; };
+		359951C428093F060074A418 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		359951C6280942A10074A418 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		359951CD280D5DA40074A418 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		35D649C1280924C400031FF7 /* alertClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alertClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D649C4280924C400031FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D649C6280924C400031FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		35D649C8280924C400031FF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		35D649CB280924C400031FF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35D649CD280924C500031FF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35D649D0280924C500031FF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35D649D2280924C500031FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,12 +42,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359951CA280964E90074A418 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		359951BD28093EA40074A418 /* Tabber */ = {
+			isa = PBXGroup;
+			children = (
+				359951BB28093E650074A418 /* MainTabberViewController.swift */,
+				359951BE28093ED40074A418 /* WorldClockViewController.swift */,
+				359951C6280942A10074A418 /* AlarmViewController.swift */,
+				359951C228093EFE0074A418 /* StopWatchViewController.swift */,
+				359951C428093F060074A418 /* TimerViewController.swift */,
+			);
+			path = Tabber;
+			sourceTree = "<group>";
+		};
 		35D649B8280924C300031FF7 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +80,14 @@
 		35D649C3280924C400031FF7 /* alertClock */ = {
 			isa = PBXGroup;
 			children = (
+				359951BD28093EA40074A418 /* Tabber */,
 				35D649C4280924C400031FF7 /* AppDelegate.swift */,
 				35D649C6280924C400031FF7 /* SceneDelegate.swift */,
 				35D649C8280924C400031FF7 /* ViewController.swift */,
-				35D649CA280924C400031FF7 /* Main.storyboard */,
 				35D649CD280924C500031FF7 /* Assets.xcassets */,
 				35D649CF280924C500031FF7 /* LaunchScreen.storyboard */,
 				35D649D2280924C500031FF7 /* Info.plist */,
+				359951CD280D5DA40074A418 /* AddAlarmViewController.swift */,
 			);
 			path = alertClock;
 			sourceTree = "<group>";
@@ -83,6 +108,9 @@
 			dependencies = (
 			);
 			name = alertClock;
+			packageProductDependencies = (
+				359951C9280964E90074A418 /* SnapKit */,
+			);
 			productName = alertClock;
 			productReference = 35D649C1280924C400031FF7 /* alertClock.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +139,9 @@
 				Base,
 			);
 			mainGroup = 35D649B8280924C300031FF7;
+			packageReferences = (
+				359951C8280964E90074A418 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 35D649C2280924C400031FF7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +158,6 @@
 			files = (
 				35D649D1280924C500031FF7 /* LaunchScreen.storyboard in Resources */,
 				35D649CE280924C500031FF7 /* Assets.xcassets in Resources */,
-				35D649CC280924C400031FF7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +168,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359951C7280942A10074A418 /* AlarmViewController.swift in Sources */,
 				35D649C9280924C400031FF7 /* ViewController.swift in Sources */,
+				359951BC28093E650074A418 /* MainTabberViewController.swift in Sources */,
+				359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */,
 				35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */,
+				359951C528093F060074A418 /* TimerViewController.swift in Sources */,
 				35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */,
+				359951C328093EFE0074A418 /* StopWatchViewController.swift in Sources */,
+				359951BF28093ED40074A418 /* WorldClockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		35D649CA280924C400031FF7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				35D649CB280924C400031FF7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		35D649CF280924C500031FF7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +320,6 @@
 				INFOPLIST_FILE = alertClock/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +347,6 @@
 				INFOPLIST_FILE = alertClock/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +384,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		359951C8280964E90074A418 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		359951C9280964E90074A418 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359951C8280964E90074A418 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35D649B9280924C300031FF7 /* Project object */;
 }
