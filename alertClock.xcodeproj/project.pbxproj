@@ -14,6 +14,7 @@
 		359951C7280942A10074A418 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951C6280942A10074A418 /* AlarmViewController.swift */; };
 		359951CA280964E90074A418 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 359951C9280964E90074A418 /* SnapKit */; };
 		359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951CD280D5DA40074A418 /* AddAlarmViewController.swift */; };
+		359951D0280E3A560074A418 /* AddAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */; };
 		35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C4280924C400031FF7 /* AppDelegate.swift */; };
 		35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C6280924C400031FF7 /* SceneDelegate.swift */; };
 		35D649C9280924C400031FF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C8280924C400031FF7 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		359951C428093F060074A418 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		359951C6280942A10074A418 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		359951CD280D5DA40074A418 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
+		359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewCell.swift; sourceTree = "<group>"; };
 		35D649C1280924C400031FF7 /* alertClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alertClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D649C4280924C400031FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D649C6280924C400031FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,11 +56,20 @@
 			children = (
 				359951BB28093E650074A418 /* MainTabberViewController.swift */,
 				359951BE28093ED40074A418 /* WorldClockViewController.swift */,
-				359951C6280942A10074A418 /* AlarmViewController.swift */,
 				359951C228093EFE0074A418 /* StopWatchViewController.swift */,
 				359951C428093F060074A418 /* TimerViewController.swift */,
 			);
 			path = Tabber;
+			sourceTree = "<group>";
+		};
+		359951D1280E3A640074A418 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				359951C6280942A10074A418 /* AlarmViewController.swift */,
+				359951CD280D5DA40074A418 /* AddAlarmViewController.swift */,
+				359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */,
+			);
+			path = Alarm;
 			sourceTree = "<group>";
 		};
 		35D649B8280924C300031FF7 = {
@@ -80,6 +91,7 @@
 		35D649C3280924C400031FF7 /* alertClock */ = {
 			isa = PBXGroup;
 			children = (
+				359951D1280E3A640074A418 /* Alarm */,
 				359951BD28093EA40074A418 /* Tabber */,
 				35D649C4280924C400031FF7 /* AppDelegate.swift */,
 				35D649C6280924C400031FF7 /* SceneDelegate.swift */,
@@ -87,7 +99,6 @@
 				35D649CD280924C500031FF7 /* Assets.xcassets */,
 				35D649CF280924C500031FF7 /* LaunchScreen.storyboard */,
 				35D649D2280924C500031FF7 /* Info.plist */,
-				359951CD280D5DA40074A418 /* AddAlarmViewController.swift */,
 			);
 			path = alertClock;
 			sourceTree = "<group>";
@@ -173,6 +184,7 @@
 				359951BC28093E650074A418 /* MainTabberViewController.swift in Sources */,
 				359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */,
 				35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */,
+				359951D0280E3A560074A418 /* AddAlarmTableViewCell.swift in Sources */,
 				359951C528093F060074A418 /* TimerViewController.swift in Sources */,
 				35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */,
 				359951C328093EFE0074A418 /* StopWatchViewController.swift in Sources */,

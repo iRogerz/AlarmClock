@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-class AlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+class AlarmViewController: UIViewController {
+
     
     //MARK: - UI
     let alarmTableView:UITableView = {
@@ -20,7 +20,7 @@ class AlarmViewController: UIViewController, UITableViewDataSource, UITableViewD
     }()
 
     
-    var data = ["asdf", "asdfss"]
+    var data = [String]()
     
     
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class AlarmViewController: UIViewController, UITableViewDataSource, UITableViewD
     func setupUI(){
         
         alarmTableView.dataSource = self
-        alarmTableView.delegate = self
+//        alarmTableView.delegate = self
         self.view.addSubview(alarmTableView)
         alarmTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -51,7 +51,8 @@ class AlarmViewController: UIViewController, UITableViewDataSource, UITableViewD
         navigationItem.rightBarButtonItem?.tintColor = .orange
         editButtonItem.tintColor = .orange
     }
-    //editing
+    
+    //editButton func
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         alarmTableView.setEditing(editing, animated: true)
@@ -62,9 +63,9 @@ class AlarmViewController: UIViewController, UITableViewDataSource, UITableViewD
         present(addAlarmNC, animated: true, completion: nil)
     }
     
-    //MARK: - TableView Function
-    
-    
+}
+
+extension AlarmViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
