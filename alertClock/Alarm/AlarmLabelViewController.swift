@@ -25,10 +25,11 @@ class AlarmLabelViewController: UIViewController {
         return myTextField
     }()
     
-    var labelDelegate:UpdateAlarmLabelDelegate?
+    weak var labelDelegate:UpdateAlarmLabelDelegate?
     
     
     //不太清楚要詢問
+    
     override func viewWillDisappear(_ animated: Bool) {
             
             if let text = textField.text {
@@ -64,7 +65,6 @@ class AlarmLabelViewController: UIViewController {
             make.height.equalTo(45)
         }
     }
-    
     
     //鍵盤不會關掉
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

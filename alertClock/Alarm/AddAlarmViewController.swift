@@ -10,7 +10,7 @@ import SnapKit
 
 class AddAlarmViewController: UIViewController {
     
-    //MARK: - UI& Variable
+    //MARK: - UI
     let datePicker:UIDatePicker = {
         let myPicker = UIDatePicker()
         myPicker.datePickerMode = .time
@@ -22,22 +22,17 @@ class AddAlarmViewController: UIViewController {
     let tableView:UITableView = {
         let myTable = UITableView()
         myTable.layer.cornerRadius = 10
+        
         //註冊addalarmtableviewcell
         myTable.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
+        //註冊addalarmButtontableviewcell
+        myTable.register(AddAlarmButtonTableViewCell.self, forCellReuseIdentifier: AddAlarmButtonTableViewCell.identifier)
         
         return myTable
     }()
-//    let switchView:UISwitch = {
-//        let mySwitch = UISwitch()
-//        mySwitch.frame = .zero
-//        mySwitch.setOn(false, animated: true)
-//        mySwitch.addTarget(AddAlarmViewController.self, action: #selector(switchChanged(_:)), for: .valueChanged)
-//        return mySwitch
-//    }()
-
     
     let addAlarmTitle = ["Repeat", "Lebal", "Sound", "Snooze"]
-    var addAlarmContent = ["Never", "Alarm", "Rader",]{
+    var addAlarmContent = ["Never", "Alarm", "Rader"]{
         didSet{
             tableView.reloadData()
         }
@@ -47,7 +42,7 @@ class AddAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkText
-        //目前無用!!!
+        //尋求幫助 不知道怎麼要才可以讓背景不透明
         overrideUserInterfaceStyle = .dark
         setupUI()
         setupNavigation()
@@ -61,6 +56,7 @@ class AddAlarmViewController: UIViewController {
         tableView.delegate = self
         self.view.addSubview(datePicker)
         self.view.addSubview(tableView)
+        
         
         datePicker.snp.makeConstraints { make in
             make.top.equalTo(view).offset(48)
@@ -99,7 +95,6 @@ class AddAlarmViewController: UIViewController {
           print("The switch is \(sender.isOn ? "ON" : "OFF")")
     }
     
-    
 }
 
 //MARK: - UITableView
@@ -110,18 +105,11 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch indexPath.row{
         case 3:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as? AddAlarmTableViewCell else{ return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmButtonTableViewCell.identifier, for: indexPath) as? AddAlarmButtonTableViewCell else{ return UITableViewCell() }
             cell.titleLabel.text = addAlarmTitle[indexPath.row]
-            
-//            建立UISwitch 到 tableView
-            let switchView = UISwitch(frame: .zero)
-            switchView.setOn(false, animated: true)
-            switchView.tag = indexPath.row // for detect which row switch Changed
-            switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
-            cell.accessoryView = switchView
-            print(addAlarmContent)
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as? AddAlarmTableViewCell else{ return UITableViewCell() }
@@ -134,11 +122,12 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row{
         case 0:
-            break
+            let repeatVC = RepeatAlarmViewController()
+            self.navigationController?.pushViewController(repeatVC, animated: true)
         case 1:
-            let vc = AlarmLabelViewController()
-            vc.labelDelegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
+            let labelVC = AlarmLabelViewController()
+            labelVC.labelDelegate = self
+            self.navigationController?.pushViewController(labelVC, animated: true)
         case 2:
             break
         case 3:
@@ -153,11 +142,10 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-
-//
 extension AddAlarmViewController:UpdateAlarmLabelDelegate{
     func updateAlarmLabel(alarmLabelText: String) {
-        self.addAlarmContent[1] = alarmLabelText
+//        self.addAlarmContent[1] = alarmLabelText
+        addAlarmContent[1] = alarmLabelText
     }
 }
 
