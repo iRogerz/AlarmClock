@@ -15,6 +15,7 @@
 		359951CA280964E90074A418 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 359951C9280964E90074A418 /* SnapKit */; };
 		359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951CD280D5DA40074A418 /* AddAlarmViewController.swift */; };
 		359951D0280E3A560074A418 /* AddAlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */; };
+		359951D3280FA74C0074A418 /* AlarmLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951D2280FA74C0074A418 /* AlarmLabelViewController.swift */; };
 		35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C4280924C400031FF7 /* AppDelegate.swift */; };
 		35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C6280924C400031FF7 /* SceneDelegate.swift */; };
 		35D649C9280924C400031FF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C8280924C400031FF7 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		359951C6280942A10074A418 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		359951CD280D5DA40074A418 /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmTableViewCell.swift; sourceTree = "<group>"; };
+		359951D2280FA74C0074A418 /* AlarmLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmLabelViewController.swift; sourceTree = "<group>"; };
 		35D649C1280924C400031FF7 /* alertClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alertClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D649C4280924C400031FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D649C6280924C400031FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				359951C6280942A10074A418 /* AlarmViewController.swift */,
 				359951CD280D5DA40074A418 /* AddAlarmViewController.swift */,
 				359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */,
+				359951D2280FA74C0074A418 /* AlarmLabelViewController.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				359951C7280942A10074A418 /* AlarmViewController.swift in Sources */,
+				359951D3280FA74C0074A418 /* AlarmLabelViewController.swift in Sources */,
 				35D649C9280924C400031FF7 /* ViewController.swift in Sources */,
 				359951BC28093E650074A418 /* MainTabberViewController.swift in Sources */,
 				359951CE280D5DA40074A418 /* AddAlarmViewController.swift in Sources */,

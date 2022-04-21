@@ -14,15 +14,13 @@ class AlarmViewController: UIViewController {
     //MARK: - UI
     let alarmTableView:UITableView = {
         let myTable = UITableView()
-        myTable.backgroundColor = .white
         myTable.separatorStyle = .singleLine
         return myTable
     }()
 
-    
     var data = [String]()
     
-    
+    //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()

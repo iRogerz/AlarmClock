@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window?.windowScene = windowScene
                 window?.rootViewController = MainTabberViewController()
                 window?.makeKeyAndVisible()
+        window?.overrideUserInterfaceStyle = .dark
 //        let nav = MainTabberViewController()
 //        let navController =  UINavigationController(rootViewController: nav)
 //        window?.rootViewController = navController

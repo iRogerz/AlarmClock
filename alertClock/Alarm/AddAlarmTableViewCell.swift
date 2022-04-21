@@ -16,7 +16,6 @@ class AddAlarmTableViewCell: UITableViewCell {
         
         //顯示 ">" 符號
         self.accessoryView = detailImageView
-//        self.accessoryView = UISwitch(frame: .zero)
         
         setupUI()
     }
@@ -37,11 +36,7 @@ class AddAlarmTableViewCell: UITableViewCell {
         myLabel.textColor = .lightGray
         return myLabel
     }()
-//    let tableSwitch:UISwitch = {
-//        let mySwitch = UISwitch()
-//        return mySwitch
-//    }()
-    
+
     let detailImageView: UIImageView = {
             // 設定這個 imageView 的圖案為 "chevron.right"
             let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
@@ -55,7 +50,7 @@ class AddAlarmTableViewCell: UITableViewCell {
     func setupUI(){
         self.addSubview(titleLabel)
         self.addSubview(contentLabel)
-//        self.addSubview(tableSwitch)
+
         
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalTo(self)
@@ -66,10 +61,7 @@ class AddAlarmTableViewCell: UITableViewCell {
             make.top.bottom.equalTo(self)
             make.trailing.equalTo(self).offset(-50)
         }
-//        tableSwitch.snp.makeConstraints { make in
-//            make.top.bottom.equalTo(self)
-//            make.trailing.equalTo(self).offset(-50)
-//        }
+
     }
     
     
