@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class AlarmLabelViewController: UIViewController {
 
@@ -14,7 +13,6 @@ class AlarmLabelViewController: UIViewController {
     //MARK: - UI
     let textField:UITextField = {
        let myTextField = UITextField()
-        myTextField.text = ""
         myTextField.backgroundColor = #colorLiteral(red: 0.1734634042, green: 0.1683282256, blue: 0.1771324873, alpha: 1)
         myTextField.returnKeyType = .done
         myTextField.clearButtonMode = .whileEditing
@@ -28,8 +26,7 @@ class AlarmLabelViewController: UIViewController {
     weak var labelDelegate:UpdateAlarmLabelDelegate?
     
     
-    //不太清楚要詢問
-    
+    //把view移除時
     override func viewWillDisappear(_ animated: Bool) {
             
             if let text = textField.text {
@@ -46,7 +43,6 @@ class AlarmLabelViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .darkText
         overrideUserInterfaceStyle = .dark
-        
         setupUI()
     }
             

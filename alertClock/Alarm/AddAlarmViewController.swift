@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import SnapKit
 
 class AddAlarmViewController: UIViewController {
+    
     
     //MARK: - UI
     let datePicker:UIDatePicker = {
@@ -18,7 +18,7 @@ class AddAlarmViewController: UIViewController {
         myPicker.preferredDatePickerStyle = .wheels
         return myPicker
     }()
-
+    
     let tableView:UITableView = {
         let myTable = UITableView()
         myTable.layer.cornerRadius = 10
@@ -37,6 +37,9 @@ class AddAlarmViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    var tempRepeatArray = [Int]()
+    
+    weak var saveAlarmDataDelegate: SaveAlarmInfoDelegate?
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -46,7 +49,7 @@ class AddAlarmViewController: UIViewController {
         overrideUserInterfaceStyle = .dark
         setupUI()
         setupNavigation()
-      
+        
     }
     
     //MARK: - setupUI
@@ -76,7 +79,7 @@ class AddAlarmViewController: UIViewController {
         navigationItem.title = "Add Alarm"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButton))
-    
+        
         //設定各物件顏色
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         navigationItem.rightBarButtonItem?.tintColor = .orange
@@ -84,15 +87,18 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func cancelButton(){
-        
+        self.dismiss(animated: true)
     }
     
     @objc func saveButton(){
+        let saveAlarmData = AddAlarmInfo(time: datePicker.date, note: addAlarmContent[1])
+        saveAlarmDataDelegate?.saveAlarmInfo(alarmData: saveAlarmData)
+        self.dismiss(animated: true)
         
     }
     @objc func switchChanged(_ sender : UISwitch!){
-          print("table row switch Changed \(sender.tag)")
-          print("The switch is \(sender.isOn ? "ON" : "OFF")")
+        print("table row switch Changed \(sender.tag)")
+        print("The switch is \(sender.isOn ? "ON" : "OFF")")
     }
     
 }
@@ -123,9 +129,12 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
         switch indexPath.row{
         case 0:
             let repeatVC = RepeatAlarmViewController()
+            repeatVC.repeatDelegate = self
+            repeatVC.isSelected = tempRepeatArray
             self.navigationController?.pushViewController(repeatVC, animated: true)
         case 1:
             let labelVC = AlarmLabelViewController()
+            labelVC.textField.text = addAlarmContent[1]
             labelVC.labelDelegate = self
             self.navigationController?.pushViewController(labelVC, animated: true)
         case 2:
@@ -144,12 +153,44 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
 
 extension AddAlarmViewController:UpdateAlarmLabelDelegate{
     func updateAlarmLabel(alarmLabelText: String) {
-//        self.addAlarmContent[1] = alarmLabelText
+        //        self.addAlarmContent[1] = alarmLabelText
         addAlarmContent[1] = alarmLabelText
     }
 }
 
-//使用delegate傳值
+
+extension AddAlarmViewController:UpdateRepeatLabelDelegate{
+    func updateRepeatLabel(repeatArray: [Int]) {
+        tempRepeatArray = repeatArray
+        switch repeatArray{
+        case [0,1,2,3,4,5,6]:
+            addAlarmContent[0] = "Every day"
+        case [1,2,3,4,5]:
+            addAlarmContent[0] = "Weekdays"
+        case [0,6]:
+            addAlarmContent[0] = "Weekend"
+        case []:
+            addAlarmContent[0] = "Never"
+        default:
+            let week = ["Sun", "Mon", "Tue", "Wed","Thu", "Fri", "Sat"]
+            addAlarmContent[0] = ""
+            for i in 0...repeatArray.count-1 {
+                let day = repeatArray[i]
+                addAlarmContent[0] += "\(week[day]) "
+            }
+        }
+    }
+}
+
+
+
+//MARK: - protocol使用delegate傳值
 protocol UpdateAlarmLabelDelegate:AnyObject{
     func updateAlarmLabel(alarmLabelText: String)
 }
+
+protocol UpdateRepeatLabelDelegate:AnyObject{
+    func updateRepeatLabel(repeatArray:[Int])
+}
+
+

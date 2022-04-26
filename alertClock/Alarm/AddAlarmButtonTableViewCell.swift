@@ -10,6 +10,15 @@ import UIKit
 //為了要製作UISwitch多新建了一個cell
 class AddAlarmButtonTableViewCell: UITableViewCell {
 
+    static let identifier = "addAlarmButtonTableViewCell"
+
+    let titleLabel:UILabel = {
+       let myLabel = UILabel()
+        
+        return myLabel
+    }()
+    
+    //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,14 +31,6 @@ class AddAlarmButtonTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    let titleLabel:UILabel = {
-       let myLabel = UILabel()
-        
-        return myLabel
-    }()
-    
-    static let identifier = "addAlarmButtonTableViewCell"
     
     func setupUI(){
         self.addSubview(titleLabel)

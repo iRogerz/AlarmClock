@@ -9,10 +9,9 @@ import UIKit
 import SnapKit
 
 class MainTabberViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .white
         setupTabbar()
         
     }
@@ -42,9 +41,15 @@ class MainTabberViewController: UITabBarController {
         
         setViewControllers([worldClockNC, alarmNC, stopWatchNC, timerNC], animated: false)
         
+        
+        //設定大title文字
+        alarmNC.navigationBar.prefersLargeTitles = true
+        alarmNC.navigationBar.largeTitleTextAttributes =
+        [NSAttributedString.Key.foregroundColor: UIColor.white,
+         .font: UIFont.boldSystemFont(ofSize: 34)]
     }
     
     
-
+    
     
 }

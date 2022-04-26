@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import SnapKit
 
 class RepeatAlarmViewController: UIViewController {
-
+    
     
     //MARK: - UI
     let tableView:UITableView = {
@@ -21,11 +20,21 @@ class RepeatAlarmViewController: UIViewController {
     
     var weekData = ["Every Sunday", "Every Monday","Every Tuesday","Every Wednesday", "Every Thrusday", "Every Friday", "Every Saturday"]
     
-    var isSelected = [Int]()
+    var isSelected = [Int](){
+        didSet{
+            isSelected.sort()
+        }
+    }
+    
+    weak var repeatDelegate:UpdateRepeatLabelDelegate?
+    
+    //把view移除時
+    override func viewWillDisappear(_ animated: Bool) {
+        repeatDelegate?.updateRepeatLabel(repeatArray: isSelected)
+    }
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         view.backgroundColor = .black
         overrideUserInterfaceStyle = .dark
@@ -37,7 +46,6 @@ class RepeatAlarmViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .orange
         tableView.dataSource = self
         tableView.delegate = self
-        
         
         view.addSubview(tableView)
         
@@ -75,7 +83,7 @@ extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
         }
         //點選時有動畫
         tableView.reloadRows(at: [indexPath], with: .automatic)
-//        tableView.reloadData()
+        //        tableView.reloadData()
         print(isSelected)
     }
     

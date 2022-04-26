@@ -6,23 +6,10 @@
 //
 
 import UIKit
-import SnapKit
 
 class AddAlarmTableViewCell: UITableViewCell {
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        //顯示 ">" 符號
-        self.accessoryView = detailImageView
-        
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    static let identifier = "AddAlarmTableViewCell"
     
     //MARK: - setupUI
     let titleLabel:UILabel = {
@@ -45,7 +32,20 @@ class AddAlarmTableViewCell: UITableViewCell {
             return imageView
         }()
     
-    static let identifier = "AddAlarmTableViewCell"
+    //MARK: - init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        //顯示 ">" 符號
+        self.accessoryView = detailImageView
+        
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func setupUI(){
         self.addSubview(titleLabel)
