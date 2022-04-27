@@ -12,9 +12,9 @@ class RepeatAlarmViewController: UIViewController {
     
     //MARK: - UI
     let tableView:UITableView = {
-        
         let myTable = UITableView(frame: CGRect.zero, style: .insetGrouped)
         myTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        myTable.tintColor = .orange
         return myTable
     }()
     
@@ -36,7 +36,7 @@ class RepeatAlarmViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .black
+        view.backgroundColor = .secondarySystemGroupedBackground
         overrideUserInterfaceStyle = .dark
         
         setupUI()

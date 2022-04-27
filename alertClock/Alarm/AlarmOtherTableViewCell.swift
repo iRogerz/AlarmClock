@@ -43,8 +43,8 @@ class AlarmOtherTableViewCell: UITableViewCell {
     
     //MARK: - setupUI
     func setupUI(){
-        self.addSubview(titleLabel)
-        self.addSubview(noteLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(noteLabel)
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self)

@@ -44,7 +44,7 @@ class AddAlarmViewController: UIViewController {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkText
+        view.backgroundColor = .secondarySystemGroupedBackground
         //尋求幫助 不知道怎麼要才可以讓背景不透明
         overrideUserInterfaceStyle = .dark
         setupUI()
@@ -91,7 +91,7 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func saveButton(){
-        let saveAlarmData = AddAlarmInfo(time: datePicker.date, note: addAlarmContent[1])
+        let saveAlarmData = AddAlarmInfo(time: datePicker.date, note: addAlarmContent[1], day: addAlarmContent[0])
         saveAlarmDataDelegate?.saveAlarmInfo(alarmData: saveAlarmData)
         self.dismiss(animated: true)
         

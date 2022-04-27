@@ -22,9 +22,10 @@ class WakeUpTableViewCell: UITableViewCell {
         let settingButton = UIButton()
         settingButton.setTitle("setting", for: .normal)
         settingButton.setTitleColor(.orange, for: .normal)
-        settingButton.backgroundColor = .gray
+        settingButton.backgroundColor = .systemGray6
 //        settingButton.layer.borderColor = UIColor.gray.cgColor
-        settingButton.layer.cornerRadius = 10
+        settingButton.layer.cornerRadius = 15
+        settingButton.layer.masksToBounds = true
         return settingButton
     }()
     
@@ -51,8 +52,9 @@ class WakeUpTableViewCell: UITableViewCell {
             make.leading.equalTo(self).offset(10)
         }
         settingButton.snp.makeConstraints { make in
-            make.top.bottom.equalTo(self)
+            make.centerY.equalTo(self)
             make.trailing.equalTo(self).offset(-10)
+            make.width.equalTo(80)
         }
     }
     

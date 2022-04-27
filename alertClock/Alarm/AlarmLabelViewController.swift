@@ -13,7 +13,7 @@ class AlarmLabelViewController: UIViewController {
     //MARK: - UI
     let textField:UITextField = {
        let myTextField = UITextField()
-        myTextField.backgroundColor = #colorLiteral(red: 0.1734634042, green: 0.1683282256, blue: 0.1771324873, alpha: 1)
+//        myTextField.backgroundColor = #colorLiteral(red: 0.1734634042, green: 0.1683282256, blue: 0.1771324873, alpha: 1)
         myTextField.returnKeyType = .done
         myTextField.clearButtonMode = .whileEditing
         myTextField.borderStyle = .roundedRect
@@ -41,7 +41,7 @@ class AlarmLabelViewController: UIViewController {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkText
+        view.backgroundColor = .secondarySystemGroupedBackground
         overrideUserInterfaceStyle = .dark
         setupUI()
     }
