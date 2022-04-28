@@ -23,7 +23,6 @@ class WakeUpTableViewCell: UITableViewCell {
         settingButton.setTitle("setting", for: .normal)
         settingButton.setTitleColor(.orange, for: .normal)
         settingButton.backgroundColor = .systemGray6
-//        settingButton.layer.borderColor = UIColor.gray.cgColor
         settingButton.layer.cornerRadius = 15
         settingButton.layer.masksToBounds = true
         return settingButton
@@ -33,6 +32,8 @@ class WakeUpTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
+        //暫時無法點擊
+        self.selectionStyle = .none
         setupUI()
     }
     

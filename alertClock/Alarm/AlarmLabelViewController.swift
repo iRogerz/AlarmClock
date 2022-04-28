@@ -50,7 +50,6 @@ class AlarmLabelViewController: UIViewController {
     func setupUI(){
         
         navigationController?.navigationBar.tintColor = .orange
-
         self.title = "Lebal"
         view.addSubview(textField)
         
@@ -62,12 +61,11 @@ class AlarmLabelViewController: UIViewController {
         }
     }
     
-    //鍵盤不會關掉
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       textField.resignFirstResponder()
-       return true
-    }
-    
+//    //鍵盤不會關掉
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//       textField.resignFirstResponder()
+//       return true
+//    }
     
 }
 

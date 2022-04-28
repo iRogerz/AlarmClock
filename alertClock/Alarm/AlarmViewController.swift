@@ -10,6 +10,16 @@ import SnapKit
 
 class AlarmViewController: UIViewController{
     
+    var addAlarmInfo:AddAlarmInfo?{
+        didSet{
+            alarmTableView.reloadData()
+        }
+    }
+    var alarmStore = AlarmStore(){
+        didSet{
+            alarmTableView.reloadData()
+        }
+    }
     
     //MARK: - UI
     let alarmTableView:UITableView = {
@@ -19,15 +29,6 @@ class AlarmViewController: UIViewController{
         myTable.register(AlarmOtherTableViewCell.self, forCellReuseIdentifier: "other")
         return myTable
     }()
-    
-    var data = [String]()
-    
-    var alarmDatas: [AddAlarmInfo] = [] {
-        didSet{
-            alarmTableView.reloadData()
-        }
-    }
-    
     
     //MARK: - lifecycle
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ class AlarmViewController: UIViewController{
     func setLayouts(){
         
         alarmTableView.snp.makeConstraints { make in
-            make.width.height.equalTo(view.safeAreaLayoutGuide)
+            make.width.height.equalToSuperview()
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
         }
     }
@@ -78,14 +79,7 @@ class AlarmViewController: UIViewController{
         present(addAlarmNC, animated: true, completion: nil)
     }
     
-    func dateToString(date: Date, format: String) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: date)
-    }
-    
 }
-
 
 
 //MARK: - tableView
@@ -95,7 +89,7 @@ extension AlarmViewController:UITableViewDataSource{
         case 0:
             return 1
         case 1:
-            return alarmDatas.count
+            return alarmStore.alarms.count
         default:
             return 0
         }
@@ -108,9 +102,9 @@ extension AlarmViewController:UITableViewDataSource{
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "other", for: indexPath) as? AlarmOtherTableViewCell else {return UITableViewCell()}
-
-            cell.titleLabel.text = dateToString(date: alarmDatas[indexPath.row].time, format: "HH:mm")
-            cell.noteLabel.text = alarmDatas[indexPath.row].noteLabel
+            let alarm = alarmStore.alarms[indexPath.row]
+            cell.titleLabel.text = alarm.time.toString(format: "HH:mm")
+            cell.noteLabel.text = alarm.noteLabel
             return cell
         default:
             return UITableViewCell()
@@ -122,9 +116,6 @@ extension AlarmViewController:UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = AlarmHeaderView()
         if section == 0{
@@ -134,67 +125,39 @@ extension AlarmViewController:UITableViewDataSource{
         }
         headerView.headerViewLabel.text = "Others"
         return headerView
-        
     }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        section == 0 ? "Sleep | Wake Up": "Others"
+//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 1{ return true}
         return false
     }
+    
     //刪除cell 還未完成
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            data.remove(at: indexPath.row)
+            alarmStore.remove(indexPath.row)
         }
     }
 }
 
 extension AlarmViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = AddAlarmViewController()
-        vc.saveAlarmDataDelegate = self
-        let addAlarmNC = UINavigationController(rootViewController: vc)
-        present(addAlarmNC, animated: true, completion: nil)
-    }
-}
-
-
-class AlarmHeaderView: UIView {
-
-    
-    // MARK: - UI
-    let headerViewLabel: UILabel = {
-        let label = UILabel()
-        // 該Label的字體顏色為白色
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        return label
-    }()
-    
-    let imageView:UIImageView = {
-       let imageView = UIImageView()
-        imageView.tintColor = .white
-        return imageView
-    }()
-    
-    // MARK: - Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        // 該View的背景色為黑色
-        self.backgroundColor = .black
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - setupUI
-    func setupUI() {
-        let stackView = UIStackView(arrangedSubviews: [imageView, headerViewLabel])
-        self.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.leading.equalTo(self).offset(5)
+        if indexPath.section == 1{
+            let vc = AddAlarmViewController()
+            vc.saveAlarmDataDelegate = self
+            let alarm = alarmStore.alarms[indexPath.row]
+            vc.addAlarmContent[0] = alarm.day
+            vc.addAlarmContent[1] = alarm.note
+            vc.datePicker.date = alarm.time
+            let addAlarmNC = UINavigationController(rootViewController: vc)
+            present(addAlarmNC, animated: true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
 }
@@ -203,14 +166,18 @@ class AlarmHeaderView: UIView {
 
 
 extension AlarmViewController:SaveAlarmInfoDelegate{
+//    func editAlarmInfo(alarmDate: AddAlarmInfo, index: IndexPath) {
+//        alarmStore.alarms[index] = alarmDate
+//    }
+    
     func saveAlarmInfo(alarmData: AddAlarmInfo) {
-        self.alarmDatas.append(alarmData)
-        
+            alarmStore.append(alarmData)
     }
 }
 
 protocol SaveAlarmInfoDelegate:AnyObject{
     func saveAlarmInfo(alarmData:AddAlarmInfo)
+//    func editAlarmInfo(alarmDate:AddAlarmInfo, index: IndexPath)
 }
 
 extension Date {

@@ -9,6 +9,8 @@ import UIKit
 
 class AddAlarmViewController: UIViewController {
     
+//    var addAlarmInfo:AddAlarmInfo?
+//    var alarmStore = AlarmStore()
     
     //MARK: - UI
     let datePicker:UIDatePicker = {
@@ -153,7 +155,6 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
 
 extension AddAlarmViewController:UpdateAlarmLabelDelegate{
     func updateAlarmLabel(alarmLabelText: String) {
-        //        self.addAlarmContent[1] = alarmLabelText
         addAlarmContent[1] = alarmLabelText
     }
 }

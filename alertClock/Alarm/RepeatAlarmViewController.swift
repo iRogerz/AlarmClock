@@ -35,7 +35,6 @@ class RepeatAlarmViewController: UIViewController {
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .secondarySystemGroupedBackground
         overrideUserInterfaceStyle = .dark
         
@@ -76,8 +75,9 @@ extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if isSelected.contains(indexPath.row){
-            isSelected = isSelected.filter { $0 != indexPath.row}
+            isSelected = isSelected.filter { $0 != indexPath.row }
         }else{
             isSelected.append(indexPath.row)
         }
@@ -88,3 +88,13 @@ extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
 }
+
+//enum week{
+//    case Mon
+//    case Tue
+//    case Wed
+//    case Thu
+//    case Fri
+//    case Sat
+//    case Sun
+//}
