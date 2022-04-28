@@ -54,7 +54,6 @@ class AlarmOtherTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self)
         }
-        
         noteLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
             make.bottom.equalTo(self).offset(-10)

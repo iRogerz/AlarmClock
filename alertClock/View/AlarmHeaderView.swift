@@ -26,7 +26,6 @@ class AlarmHeaderView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // 該View的背景色為黑色
         self.backgroundColor = .black
         setupUI()
     }

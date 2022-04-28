@@ -9,7 +9,6 @@ import UIKit
 
 class WakeUpTableViewCell: UITableViewCell {
     
-//    static let identifier = "wakeUpTableViewCell"
     
     //MARK: - UI
     let wakeupLebal:UILabel = {

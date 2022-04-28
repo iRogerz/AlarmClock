@@ -29,6 +29,7 @@
 		35F6C5A32819271100E81F97 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6C5A22819271100E81F97 /* DateExtension.swift */; };
 		35F6C5A5281927D400E81F97 /* AlarmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6C5A4281927D400E81F97 /* AlarmStore.swift */; };
 		35F6C5A7281A3CC600E81F97 /* AlarmHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6C5A6281A3CC600E81F97 /* AlarmHeaderView.swift */; };
+		35F6C5A9281A8C8E00E81F97 /* AlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6C5A8281A8C8E00E81F97 /* AlarmView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		35F6C5A22819271100E81F97 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		35F6C5A4281927D400E81F97 /* AlarmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStore.swift; sourceTree = "<group>"; };
 		35F6C5A6281A3CC600E81F97 /* AlarmHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmHeaderView.swift; sourceTree = "<group>"; };
+		35F6C5A8281A8C8E00E81F97 /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		353534EB281909D9000E55B1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				359951D1280E3A640074A418 /* Alarm */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -84,6 +87,7 @@
 				359951DE281697E90074A418 /* AlarmOtherTableViewCell.swift */,
 				359951CF280E3A560074A418 /* AddAlarmTableViewCell.swift */,
 				359951D628117F8D0074A418 /* AddAlarmButtonTableViewCell.swift */,
+				35F6C5A8281A8C8E00E81F97 /* AlarmView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,7 +154,6 @@
 				353534ED281909E4000E55B1 /* Model */,
 				353534EC281909E0000E55B1 /* View */,
 				353534EB281909D9000E55B1 /* Controller */,
-				359951D1280E3A640074A418 /* Alarm */,
 				359951BD28093EA40074A418 /* Tabber */,
 				35D649C4280924C400031FF7 /* AppDelegate.swift */,
 				35D649C6280924C400031FF7 /* SceneDelegate.swift */,
@@ -240,6 +243,7 @@
 			files = (
 				359951C7280942A10074A418 /* AlarmViewController.swift in Sources */,
 				35F6C5A32819271100E81F97 /* DateExtension.swift in Sources */,
+				35F6C5A9281A8C8E00E81F97 /* AlarmView.swift in Sources */,
 				359951DF281697E90074A418 /* AlarmOtherTableViewCell.swift in Sources */,
 				359951D3280FA74C0074A418 /* AlarmLabelViewController.swift in Sources */,
 				35D649C9280924C400031FF7 /* ViewController.swift in Sources */,

@@ -20,12 +20,12 @@ struct AddAlarmInfo{
         }
         return note
     }
-    let isEdit = false
+    
+    var isEdit = false
     init(time: Date, note: String, day: String){
         self.time = time
         self.note = note
         self.day = day
-//        self.index = index
     }
     
 //    mutating func add(time:Date, note: String){
