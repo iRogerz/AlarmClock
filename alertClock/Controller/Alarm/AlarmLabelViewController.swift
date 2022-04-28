@@ -52,7 +52,6 @@ class AlarmLabelViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .orange
         self.title = "Lebal"
         view.addSubview(textField)
-        
         textField.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalTo(view.safeAreaLayoutGuide)

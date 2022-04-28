@@ -9,9 +9,7 @@ import UIKit
 
 class AddAlarmViewController: UIViewController {
     
-//    var addAlarmInfo:AddAlarmInfo?
-//    var alarmStore = AlarmStore()
-    
+
     //MARK: - UI
     let datePicker:UIDatePicker = {
         let myPicker = UIDatePicker()
@@ -24,7 +22,7 @@ class AddAlarmViewController: UIViewController {
     let tableView:UITableView = {
         let myTable = UITableView()
         myTable.layer.cornerRadius = 10
-        
+        myTable.isScrollEnabled = false
         //註冊addalarmtableviewcell
         myTable.register(AddAlarmTableViewCell.self, forCellReuseIdentifier: AddAlarmTableViewCell.identifier)
         //註冊addalarmButtontableviewcell
@@ -40,6 +38,7 @@ class AddAlarmViewController: UIViewController {
         }
     }
     var tempRepeatArray = [Int]()
+    var tempIndexRow:Int = 0
     
     weak var saveAlarmDataDelegate: SaveAlarmInfoDelegate?
     
@@ -94,7 +93,7 @@ class AddAlarmViewController: UIViewController {
     
     @objc func saveButton(){
         let saveAlarmData = AddAlarmInfo(time: datePicker.date, note: addAlarmContent[1], day: addAlarmContent[0])
-        saveAlarmDataDelegate?.saveAlarmInfo(alarmData: saveAlarmData)
+        saveAlarmDataDelegate?.saveAlarmInfo(alarmData: saveAlarmData, index: tempIndexRow)
         self.dismiss(animated: true)
         
     }
@@ -158,7 +157,6 @@ extension AddAlarmViewController:UpdateAlarmLabelDelegate{
         addAlarmContent[1] = alarmLabelText
     }
 }
-
 
 extension AddAlarmViewController:UpdateRepeatLabelDelegate{
     func updateRepeatLabel(repeatArray: [Int]) {

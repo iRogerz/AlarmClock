@@ -10,11 +10,6 @@ import SnapKit
 
 class AlarmViewController: UIViewController{
     
-    var addAlarmInfo:AddAlarmInfo?{
-        didSet{
-            alarmTableView.reloadData()
-        }
-    }
     var alarmStore = AlarmStore(){
         didSet{
             alarmTableView.reloadData()
@@ -73,6 +68,7 @@ class AlarmViewController: UIViewController{
     }
     
     @objc func addAlarm(){
+        alarmStore.isEdit = false
         let vc = AddAlarmViewController()
         vc.saveAlarmDataDelegate = self
         let addAlarmNC = UINavigationController(rootViewController: vc)
@@ -94,6 +90,7 @@ extension AlarmViewController:UITableViewDataSource{
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section{
@@ -126,19 +123,16 @@ extension AlarmViewController:UITableViewDataSource{
         headerView.headerViewLabel.text = "Others"
         return headerView
     }
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        section == 0 ? "Sleep | Wake Up": "Others"
-//    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-
+    //是否能使用edit編輯
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 1{ return true}
         return false
     }
-    
-    //刪除cell 還未完成
+    //刪除cell
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             alarmStore.remove(indexPath.row)
@@ -149,40 +143,33 @@ extension AlarmViewController:UITableViewDataSource{
 extension AlarmViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1{
+            alarmStore.isEdit = true
             let vc = AddAlarmViewController()
             vc.saveAlarmDataDelegate = self
             let alarm = alarmStore.alarms[indexPath.row]
             vc.addAlarmContent[0] = alarm.day
             vc.addAlarmContent[1] = alarm.note
             vc.datePicker.date = alarm.time
+            vc.tempIndexRow = indexPath.row
             let addAlarmNC = UINavigationController(rootViewController: vc)
             present(addAlarmNC, animated: true, completion: nil)
+            //取消select的狀態
             tableView.deselectRow(at: indexPath, animated: false)
         }
     }
 }
 
-
-
-
+//MARK: - saveAlarmInfo
 extension AlarmViewController:SaveAlarmInfoDelegate{
-//    func editAlarmInfo(alarmDate: AddAlarmInfo, index: IndexPath) {
-//        alarmStore.alarms[index] = alarmDate
-//    }
-    
-    func saveAlarmInfo(alarmData: AddAlarmInfo) {
+    func saveAlarmInfo(alarmData: AddAlarmInfo, index: Int) {
+        if alarmStore.isEdit == false{
             alarmStore.append(alarmData)
+        }else{
+            alarmStore.edit(alarmData, index)
+        }
     }
 }
 
 protocol SaveAlarmInfoDelegate:AnyObject{
-    func saveAlarmInfo(alarmData:AddAlarmInfo)
-//    func editAlarmInfo(alarmDate:AddAlarmInfo, index: IndexPath)
+    func saveAlarmInfo(alarmData:AddAlarmInfo, index: Int)
 }
-
-extension Date {
-    var localizedDescription: String {
-        return description(with: .current)
-    }
-}
-

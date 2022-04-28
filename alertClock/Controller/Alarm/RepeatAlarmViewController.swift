@@ -43,6 +43,7 @@ class RepeatAlarmViewController: UIViewController {
     
     func setupUI(){
         navigationController?.navigationBar.tintColor = .orange
+//        navigationItem.backBarButtonItem?.title = "Back"
         tableView.dataSource = self
         tableView.delegate = self
         
