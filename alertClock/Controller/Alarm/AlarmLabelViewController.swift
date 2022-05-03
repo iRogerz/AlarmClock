@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlarmLabelViewController: UIViewController {
+class AlarmLabelViewController: UIViewController,UITextFieldDelegate {
 
     
     //MARK: - UI
@@ -17,14 +17,10 @@ class AlarmLabelViewController: UIViewController {
         myTextField.returnKeyType = .done
         myTextField.clearButtonMode = .whileEditing
         myTextField.borderStyle = .roundedRect
-        
-        //讓keyboard直接出現在畫面上
-        myTextField.becomeFirstResponder()
         return myTextField
     }()
     
     weak var labelDelegate:UpdateAlarmLabelDelegate?
-    
     
     //把view移除時
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,7 +39,14 @@ class AlarmLabelViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemGroupedBackground
         overrideUserInterfaceStyle = .dark
+        textField.delegate = self
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //讓keyboard直接出現在畫面上
+        textField.becomeFirstResponder()
     }
             
     //MARK: - SetupUI
@@ -60,12 +63,10 @@ class AlarmLabelViewController: UIViewController {
         }
     }
     
-//    //鍵盤不會關掉
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//       textField.resignFirstResponder()
-//       return true
-//    }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 

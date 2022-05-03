@@ -8,8 +8,18 @@
 import UIKit
 
 class AddAlarmViewController: UIViewController {
-    
 
+    
+    var alarm = AlarmInfo(){
+        didSet{
+            datePicker.date = alarm.time
+            addAlarmContent[0] = alarm.day
+            addAlarmContent[1] = alarm.note
+            tableView.reloadData()
+        }
+    }
+    var alarmStore = AlarmStore()
+    
     //MARK: - UI
     let datePicker:UIDatePicker = {
         let myPicker = UIDatePicker()
@@ -37,7 +47,6 @@ class AddAlarmViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    var tempRepeatArray = [Int]()
     var tempIndexRow:Int = 0
     
     weak var saveAlarmDataDelegate: SaveAlarmInfoDelegate?
@@ -50,7 +59,6 @@ class AddAlarmViewController: UIViewController {
         overrideUserInterfaceStyle = .dark
         setupUI()
         setupNavigation()
-        
     }
     
     //MARK: - setupUI
@@ -92,15 +100,13 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func saveButton(){
-        let saveAlarmData = AddAlarmInfo(time: datePicker.date, note: addAlarmContent[1], day: addAlarmContent[0])
-        saveAlarmDataDelegate?.saveAlarmInfo(alarmData: saveAlarmData, index: tempIndexRow)
+        saveAlarmDataDelegate?.saveAlarmInfo(alarmData: alarm, index: tempIndexRow)
         self.dismiss(animated: true)
-        
     }
-    @objc func switchChanged(_ sender : UISwitch!){
-        print("table row switch Changed \(sender.tag)")
-        print("The switch is \(sender.isOn ? "ON" : "OFF")")
-    }
+//    @objc func switchChanged(_ sender : UISwitch!){
+//        print("table row switch Changed \(sender.tag)")
+//        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+//    }
     
 }
 
@@ -131,11 +137,11 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
         case 0:
             let repeatVC = RepeatAlarmViewController()
             repeatVC.repeatDelegate = self
-            repeatVC.isSelected = tempRepeatArray
+            repeatVC.alarmStore.selectDays = alarmStore.selectDays
             self.navigationController?.pushViewController(repeatVC, animated: true)
         case 1:
             let labelVC = AlarmLabelViewController()
-            labelVC.textField.text = addAlarmContent[1]
+            labelVC.textField.text = alarm.note
             labelVC.labelDelegate = self
             self.navigationController?.pushViewController(labelVC, animated: true)
         case 2:
@@ -154,33 +160,19 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
 
 extension AddAlarmViewController:UpdateAlarmLabelDelegate{
     func updateAlarmLabel(alarmLabelText: String) {
+        alarm.note = alarmLabelText
         addAlarmContent[1] = alarmLabelText
     }
 }
 
 extension AddAlarmViewController:UpdateRepeatLabelDelegate{
-    func updateRepeatLabel(repeatArray: [Int]) {
-        tempRepeatArray = repeatArray
-        switch repeatArray{
-        case [0,1,2,3,4,5,6]:
-            addAlarmContent[0] = "Every day"
-        case [1,2,3,4,5]:
-            addAlarmContent[0] = "Weekdays"
-        case [0,6]:
-            addAlarmContent[0] = "Weekend"
-        case []:
-            addAlarmContent[0] = "Never"
-        default:
-            let week = ["Sun", "Mon", "Tue", "Wed","Thu", "Fri", "Sat"]
-            addAlarmContent[0] = ""
-            for i in 0...repeatArray.count-1 {
-                let day = repeatArray[i]
-                addAlarmContent[0] += "\(week[day]) "
-            }
-        }
+    func updateRepeatLabel(selectedDay: Set<Day>) {
+        alarmStore.selectDays = selectedDay
+        let repeatDay = alarmStore.repeatDay
+        alarm.day = repeatDay
+        addAlarmContent[0] = repeatDay
     }
 }
-
 
 
 //MARK: - protocol使用delegate傳值
@@ -189,7 +181,7 @@ protocol UpdateAlarmLabelDelegate:AnyObject{
 }
 
 protocol UpdateRepeatLabelDelegate:AnyObject{
-    func updateRepeatLabel(repeatArray:[Int])
+    func updateRepeatLabel(selectedDay:Set<Day>)
 }
 
 

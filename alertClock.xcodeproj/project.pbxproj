@@ -20,7 +20,7 @@
 		359951D728117F8D0074A418 /* AddAlarmButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951D628117F8D0074A418 /* AddAlarmButtonTableViewCell.swift */; };
 		359951DD281685E70074A418 /* WakeUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951DC281685E70074A418 /* WakeUpTableViewCell.swift */; };
 		359951DF281697E90074A418 /* AlarmOtherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951DE281697E90074A418 /* AlarmOtherTableViewCell.swift */; };
-		359951E12816A1A20074A418 /* AddAlarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951E02816A1A20074A418 /* AddAlarmInfo.swift */; };
+		359951E12816A1A20074A418 /* AlarmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359951E02816A1A20074A418 /* AlarmInfo.swift */; };
 		35D649C5280924C400031FF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C4280924C400031FF7 /* AppDelegate.swift */; };
 		35D649C7280924C400031FF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C6280924C400031FF7 /* SceneDelegate.swift */; };
 		35D649C9280924C400031FF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D649C8280924C400031FF7 /* ViewController.swift */; };
@@ -45,7 +45,7 @@
 		359951D628117F8D0074A418 /* AddAlarmButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmButtonTableViewCell.swift; sourceTree = "<group>"; };
 		359951DC281685E70074A418 /* WakeUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpTableViewCell.swift; sourceTree = "<group>"; };
 		359951DE281697E90074A418 /* AlarmOtherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOtherTableViewCell.swift; sourceTree = "<group>"; };
-		359951E02816A1A20074A418 /* AddAlarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmInfo.swift; sourceTree = "<group>"; };
+		359951E02816A1A20074A418 /* AlarmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmInfo.swift; sourceTree = "<group>"; };
 		35D649C1280924C400031FF7 /* alertClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alertClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D649C4280924C400031FF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D649C6280924C400031FF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		353534ED281909E4000E55B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				359951E02816A1A20074A418 /* AddAlarmInfo.swift */,
+				359951E02816A1A20074A418 /* AlarmInfo.swift */,
 				35F6C5A4281927D400E81F97 /* AlarmStore.swift */,
 			);
 			path = Model;
@@ -260,7 +260,7 @@
 				359951BF28093ED40074A418 /* WorldClockViewController.swift in Sources */,
 				35F6C5A5281927D400E81F97 /* AlarmStore.swift in Sources */,
 				359951D528114D4B0074A418 /* RepeatAlarmViewController.swift in Sources */,
-				359951E12816A1A20074A418 /* AddAlarmInfo.swift in Sources */,
+				359951E12816A1A20074A418 /* AlarmInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

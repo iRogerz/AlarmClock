@@ -9,6 +9,11 @@ import UIKit
 
 class RepeatAlarmViewController: UIViewController {
     
+    var alarmStore = AlarmStore(){
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     //MARK: - UI
     let tableView:UITableView = {
@@ -18,32 +23,23 @@ class RepeatAlarmViewController: UIViewController {
         return myTable
     }()
     
-    var weekData = ["Every Sunday", "Every Monday","Every Tuesday","Every Wednesday", "Every Thrusday", "Every Friday", "Every Saturday"]
-    
-    var isSelected = [Int](){
-        didSet{
-            isSelected.sort()
-        }
-    }
-    
     weak var repeatDelegate:UpdateRepeatLabelDelegate?
     
     //把view移除時
     override func viewWillDisappear(_ animated: Bool) {
-        repeatDelegate?.updateRepeatLabel(repeatArray: isSelected)
+        repeatDelegate?.updateRepeatLabel(selectedDay: alarmStore.selectDays)
     }
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemGroupedBackground
         overrideUserInterfaceStyle = .dark
-        
         setupUI()
     }
     
     func setupUI(){
         navigationController?.navigationBar.tintColor = .orange
-//        navigationItem.backBarButtonItem?.title = "Back"
+        navigationItem.backBarButtonItem?.title = "Back"
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -58,44 +54,35 @@ class RepeatAlarmViewController: UIViewController {
 
 extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weekData.count
+        return Day.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = weekData[indexPath.row]
-        
-        cell.selectionStyle = .none
-        
-        if isSelected.contains(indexPath.row){
-            cell.accessoryType = .checkmark
-        }else{
-            cell.accessoryType = .none
-        }
+        let isSelected = alarmStore.days[indexPath.row]
+        cell.textLabel?.text = isSelected.dayString
+//        cell.selectionStyle = .none
+        cell.accessoryType = alarmStore.selectDays.contains(isSelected) ? .checkmark : .none
+//        if alarm.selectDays.contains(isSelected){
+//            cell.accessoryType = .checkmark
+//        }else{
+//            cell.accessoryType = .none
+//        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if isSelected.contains(indexPath.row){
-            isSelected = isSelected.filter { $0 != indexPath.row }
+        let isSelected = alarmStore.days[indexPath.row]
+        print(indexPath.row)
+        if alarmStore.selectDays.contains(isSelected){
+            alarmStore.selectDays.remove(isSelected)
         }else{
-            isSelected.append(indexPath.row)
+            alarmStore.selectDays.insert(isSelected)
         }
         //點選時有動畫
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        //        tableView.reloadData()
-        print(isSelected)
+//        print(alarm.selectDays)
     }
     
 }
 
-//enum week{
-//    case Mon
-//    case Tue
-//    case Wed
-//    case Thu
-//    case Fri
-//    case Sat
-//    case Sun
-//}

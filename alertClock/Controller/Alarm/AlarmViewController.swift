@@ -146,9 +146,7 @@ extension AlarmViewController:UITableViewDelegate{
             let vc = AddAlarmViewController()
             vc.saveAlarmDataDelegate = self
             let alarm = alarmStore.alarms[indexPath.row]
-            vc.addAlarmContent[0] = alarm.day
-            vc.addAlarmContent[1] = alarm.note
-            vc.datePicker.date = alarm.time
+            vc.alarm = alarm
             vc.tempIndexRow = indexPath.row
             let addAlarmNC = UINavigationController(rootViewController: vc)
             present(addAlarmNC, animated: true, completion: nil)
@@ -160,7 +158,7 @@ extension AlarmViewController:UITableViewDelegate{
 
 //MARK: - saveAlarmInfo
 extension AlarmViewController:SaveAlarmInfoDelegate{
-    func saveAlarmInfo(alarmData: AddAlarmInfo, index: Int) {
+    func saveAlarmInfo(alarmData: AlarmInfo, index: Int) {
         if alarmStore.isEdit == false{
             alarmStore.append(alarmData)
         }else{
@@ -170,5 +168,5 @@ extension AlarmViewController:SaveAlarmInfoDelegate{
 }
 
 protocol SaveAlarmInfoDelegate:AnyObject{
-    func saveAlarmInfo(alarmData:AddAlarmInfo, index: Int)
+    func saveAlarmInfo(alarmData:AlarmInfo, index: Int)
 }

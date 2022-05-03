@@ -61,6 +61,8 @@ class AlarmOtherTableViewCell: UITableViewCell {
     }
     
     @objc func switchChanged(_ sender : UISwitch!){
+//        let current = UNUserNotificationCenter.current()
+        
         if sender.isOn{
             titleLabel.textColor = .white
             noteLabel.textColor = .white
