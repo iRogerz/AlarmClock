@@ -8,17 +8,30 @@
 import UIKit
 
 class AddAlarmViewController: UIViewController {
-
+    
+    var contentItems: [ContentItem] {
+        [
+            .days(alarm.repeatDay),
+            .label(alarm.note),
+            .sounds("None"),
+            .snooze(true)
+        ]
+    }
+    
+    //    var items: [Item] {
+    //        [
+    //            Item(title: "Day", value: .string(alarm.repeatDay)),
+    //            Item(title: "Label", value: .string(alarm.note)),
+    //            Item(title: "Snooze", value: .bool(true))
+    //        ]
+    //    }
     
     var alarm = AlarmInfo(){
         didSet{
-            datePicker.date = alarm.time
-            addAlarmContent[0] = alarm.day
-            addAlarmContent[1] = alarm.note
+            datePicker.date = alarm.date
             tableView.reloadData()
         }
     }
-    var alarmStore = AlarmStore()
     
     //MARK: - UI
     let datePicker:UIDatePicker = {
@@ -41,12 +54,6 @@ class AddAlarmViewController: UIViewController {
         return myTable
     }()
     
-    let addAlarmTitle = ["Repeat", "Lebal", "Sound", "Snooze"]
-    var addAlarmContent = ["Never", "Alarm", "Rader"]{
-        didSet{
-            tableView.reloadData()
-        }
-    }
     var tempIndexRow:Int = 0
     
     weak var saveAlarmDataDelegate: SaveAlarmInfoDelegate?
@@ -60,6 +67,7 @@ class AddAlarmViewController: UIViewController {
         setupUI()
         setupNavigation()
     }
+    
     
     //MARK: - setupUI
     func setupUI(){
@@ -100,13 +108,14 @@ class AddAlarmViewController: UIViewController {
     }
     
     @objc func saveButton(){
+        alarm.date = datePicker.date
         saveAlarmDataDelegate?.saveAlarmInfo(alarmData: alarm, index: tempIndexRow)
         self.dismiss(animated: true)
     }
-//    @objc func switchChanged(_ sender : UISwitch!){
-//        print("table row switch Changed \(sender.tag)")
-//        print("The switch is \(sender.isOn ? "ON" : "OFF")")
-//    }
+    //    @objc func switchChanged(_ sender : UISwitch!){
+    //        print("table row switch Changed \(sender.tag)")
+    //        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+    //    }
     
 }
 
@@ -114,40 +123,53 @@ class AddAlarmViewController: UIViewController {
 extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return addAlarmTitle.count
+        return contentItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.row{
-        case 3:
+        let item = contentItems[indexPath.row]
+        let title = item.title
+        switch item {
+        case .snooze(let bool):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmButtonTableViewCell.identifier, for: indexPath) as? AddAlarmButtonTableViewCell else{ return UITableViewCell() }
-            cell.titleLabel.text = addAlarmTitle[indexPath.row]
+            cell.titleLabel.text = title
+            cell.mySwitch.isOn = bool
             return cell
-        default:
+        case .label(let string), .days(let string), .sounds(let string):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as? AddAlarmTableViewCell else{ return UITableViewCell() }
-            cell.titleLabel.text = addAlarmTitle[indexPath.row]
-            cell.contentLabel.text = addAlarmContent[indexPath.row]
+            cell.titleLabel.text = title
+            cell.contentLabel.text = string
             return cell
         }
+                
+        //        switch item.value {
+        //        case .bool(let bool):
+        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmButtonTableViewCell.identifier, for: indexPath) as? AddAlarmButtonTableViewCell else{ return UITableViewCell() }
+        //            cell.titleLabel.text = title
+        //            cell.mySwitch.isOn = bool
+        //            return cell
+        //        case .string(let string):
+        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddAlarmTableViewCell.identifier, for: indexPath) as? AddAlarmTableViewCell else{ return UITableViewCell() }
+        //            cell.titleLabel.text = title
+        //            cell.contentLabel.text = string
+        //            return cell
+        //        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row{
-        case 0:
+        let item = contentItems[indexPath.row]
+        switch item {
+        case .days:
             let repeatVC = RepeatAlarmViewController()
             repeatVC.repeatDelegate = self
-            repeatVC.alarmStore.selectDays = alarmStore.selectDays
+            repeatVC.selectDays = alarm.selectDays
             self.navigationController?.pushViewController(repeatVC, animated: true)
-        case 1:
+        case .label:
             let labelVC = AlarmLabelViewController()
             labelVC.textField.text = alarm.note
             labelVC.labelDelegate = self
             self.navigationController?.pushViewController(labelVC, animated: true)
-        case 2:
-            break
-        case 3:
-            break
         default:
             break
         }
@@ -161,16 +183,13 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
 extension AddAlarmViewController:UpdateAlarmLabelDelegate{
     func updateAlarmLabel(alarmLabelText: String) {
         alarm.note = alarmLabelText
-        addAlarmContent[1] = alarmLabelText
     }
 }
 
 extension AddAlarmViewController:UpdateRepeatLabelDelegate{
+    
     func updateRepeatLabel(selectedDay: Set<Day>) {
-        alarmStore.selectDays = selectedDay
-        let repeatDay = alarmStore.repeatDay
-        alarm.day = repeatDay
-        addAlarmContent[0] = repeatDay
+        alarm.selectDays = selectedDay
     }
 }
 
@@ -185,3 +204,31 @@ protocol UpdateRepeatLabelDelegate:AnyObject{
 }
 
 
+
+extension AddAlarmViewController {
+    
+    enum ContentItem {
+        case days(String), label(String), sounds(String), snooze(Bool)
+        
+        var title: String {
+            switch self {
+            case .label: return "Label"
+            case .sounds: return "Sounds"
+            case .snooze: return "Snooze"
+            case .days: return "Days"
+            }
+        }
+    }
+    
+}
+
+
+//enum Value {
+//    case string(String)
+//    case bool(Bool)
+//}
+//
+//struct Item {
+//    let title: String
+//    let value: Value
+//}

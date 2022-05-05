@@ -33,6 +33,8 @@ class AlarmViewController: UIViewController{
         setupNavigation()
         setViews()
         setLayouts()
+        
+       
     }
     
     //MARK: - setViews
@@ -99,8 +101,9 @@ extension AlarmViewController:UITableViewDataSource{
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "other", for: indexPath) as? AlarmOtherTableViewCell else {return UITableViewCell()}
             let alarm = alarmStore.alarms[indexPath.row]
-            cell.titleLabel.text = alarm.time.toString(format: "HH:mm")
+            cell.titleLabel.text = alarm.date.toString(format: "HH:mm")
             cell.noteLabel.text = alarm.noteLabel
+            cell.alarm = alarm
             return cell
         default:
             return UITableViewCell()

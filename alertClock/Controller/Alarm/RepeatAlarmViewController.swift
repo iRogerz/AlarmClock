@@ -9,11 +9,12 @@ import UIKit
 
 class RepeatAlarmViewController: UIViewController {
     
-    var alarmStore = AlarmStore(){
-        didSet{
+    var selectDays:Set<Day> = [] {
+        didSet {
             tableView.reloadData()
         }
     }
+
     
     //MARK: - UI
     let tableView:UITableView = {
@@ -27,8 +28,9 @@ class RepeatAlarmViewController: UIViewController {
     
     //把view移除時
     override func viewWillDisappear(_ animated: Bool) {
-        repeatDelegate?.updateRepeatLabel(selectedDay: alarmStore.selectDays)
+        repeatDelegate?.updateRepeatLabel(selectedDay: selectDays)
     }
+    
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,25 +61,19 @@ extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let isSelected = alarmStore.days[indexPath.row]
-        cell.textLabel?.text = isSelected.dayString
-//        cell.selectionStyle = .none
-        cell.accessoryType = alarmStore.selectDays.contains(isSelected) ? .checkmark : .none
-//        if alarm.selectDays.contains(isSelected){
-//            cell.accessoryType = .checkmark
-//        }else{
-//            cell.accessoryType = .none
-//        }
+        let day = Day.allCases[indexPath.row]
+        let isSelected = selectDays.contains(day)
+        cell.textLabel?.text = day.dayString
+        cell.accessoryType = isSelected ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isSelected = alarmStore.days[indexPath.row]
-        print(indexPath.row)
-        if alarmStore.selectDays.contains(isSelected){
-            alarmStore.selectDays.remove(isSelected)
+        let day = Day.allCases[indexPath.row]
+        if selectDays.contains(day){
+            selectDays.remove(day)
         }else{
-            alarmStore.selectDays.insert(isSelected)
+            selectDays.insert(day)
         }
         //點選時有動畫
         tableView.reloadRows(at: [indexPath], with: .automatic)

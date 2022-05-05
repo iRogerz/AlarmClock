@@ -11,6 +11,8 @@ import UIKit
 class AddAlarmButtonTableViewCell: UITableViewCell {
 
     static let identifier = "addAlarmButtonTableViewCell"
+    
+    let mySwitch = UISwitch()
 
     let titleLabel:UILabel = {
        let myLabel = UILabel()
@@ -23,7 +25,7 @@ class AddAlarmButtonTableViewCell: UITableViewCell {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.accessoryView = UISwitch()
+        self.accessoryView = mySwitch
         
         setupUI()
     }

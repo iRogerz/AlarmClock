@@ -9,6 +9,9 @@ import UIKit
 
 class AlarmOtherTableViewCell: UITableViewCell {
     
+    var alarm = AlarmInfo()
+    let userNotification = UserNotification()
+    
     //MARK: - UI
     let titleLabel:UILabel = {
         let label = UILabel()
@@ -61,17 +64,20 @@ class AlarmOtherTableViewCell: UITableViewCell {
     }
     
     @objc func switchChanged(_ sender : UISwitch!){
-//        let current = UNUserNotificationCenter.current()
+        let current = UNUserNotificationCenter.current()
         
         if sender.isOn{
             titleLabel.textColor = .white
             noteLabel.textColor = .white
+            userNotification.addNotificationRequest(alarm: alarm)
+            
         }else{
             titleLabel.textColor = .lightGray
             noteLabel.textColor = .lightGray
+            current.removeAllPendingNotificationRequests()
         }
-//        print("table row switch Changed \(sender.tag)")
-//        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+        
     }
-
+    
+    
 }

@@ -13,8 +13,11 @@ class MainTabberViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let current = UNUserNotificationCenter.current()
+        current.requestAuthorization(options: [.alert], completionHandler: { granted, error in
+        })
         setupTabbar()
-        
+
     }
     
     func setupTabbar(){
@@ -49,8 +52,5 @@ class MainTabberViewController: UITabBarController {
         [NSAttributedString.Key.foregroundColor: UIColor.white,
          .font: UIFont.boldSystemFont(ofSize: 34)]
     }
-    
-    
-    
     
 }
