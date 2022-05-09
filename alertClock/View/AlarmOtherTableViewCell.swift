@@ -9,26 +9,12 @@ import UIKit
 
 class AlarmOtherTableViewCell: UITableViewCell {
     
-    var alarm = AlarmInfo()
-    let userNotification = UserNotification()
+//    var alarm = AlarmInfo()
+//    let userNotification = UserNotification()
+    
+    var callBackSwitchState:((Bool) -> (Void))?
     
     //MARK: - UI
-    let titleLabel:UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 50)
-        // 先暫時給個假定時間
-//        label.text = "05:50"
-        label.textColor = .lightGray
-        return label
-    }()
-    
-    let noteLabel:UILabel = {
-        let label = UILabel()
-//        label.text = "吃香蕉"
-        label.textColor = .lightGray
-        return label
-    }()
-    
     let lightSwitch:UISwitch = {
         let lightSwitch = UISwitch(frame: .zero)
         lightSwitch.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
@@ -37,11 +23,12 @@ class AlarmOtherTableViewCell: UITableViewCell {
     
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
         
         // 設定accessoryView 為 UISwitch
         self.accessoryView = lightSwitch
+        self.editingAccessoryType = .disclosureIndicator
         setupUI()
     }
     
@@ -51,33 +38,25 @@ class AlarmOtherTableViewCell: UITableViewCell {
     
     //MARK: - setupUI
     func setupUI(){
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(noteLabel)
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self)
-        }
-        noteLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.bottom.equalTo(self).offset(-10)
-        }
+        textLabel?.font = UIFont.systemFont(ofSize: 50)
+        textLabel?.textColor = .lightGray
+        detailTextLabel?.textColor = .lightGray
+        detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
     }
     
-    @objc func switchChanged(_ sender : UISwitch!){
-        let current = UNUserNotificationCenter.current()
-        
-        if sender.isOn{
-            titleLabel.textColor = .white
-            noteLabel.textColor = .white
-            userNotification.addNotificationRequest(alarm: alarm)
-            
-        }else{
-            titleLabel.textColor = .lightGray
-            noteLabel.textColor = .lightGray
-            current.removeAllPendingNotificationRequests()
-        }
-        
+    @objc func switchChanged(_ sender : UISwitch){
+//        let current = UNUserNotificationCenter.current()
+        callBackSwitchState?(sender.isOn)
+//        print("table row switch Changed \(sender.tag)")
+//        if sender.isOn{
+//            textLabel?.textColor = .white
+//            detailTextLabel?.textColor = .white
+//            userNotification.addNotificationRequest(alarm: alarm)
+//        }else{
+//            textLabel?.textColor = .lightGray
+//            detailTextLabel?.textColor = .lightGray
+//            current.removeAllPendingNotificationRequests()
+//        }
+
     }
-    
-    
 }

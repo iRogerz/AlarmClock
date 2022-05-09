@@ -7,10 +7,11 @@
 
 import Foundation
 import NotificationCenter
+import AVFoundation
 
 
 class UserNotification{
-    func addNotificationRequest(alarm: AlarmInfo){
+    static func addNotificationRequest(alarm: AlarmInfo){
         let current = UNUserNotificationCenter.current()
         
 //        current.removeAllPendingNotificationRequests()
@@ -18,13 +19,16 @@ class UserNotification{
         content.title = "Clock"
         content.subtitle = "Alarm"
         //        content.categoryIdentifier = "alarm"
-        content.sound = UNNotificationSound.default
+//        content.sound =
+        
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: alarm.date)
         let minute = calendar.component(.minute, from: alarm.date)
         var dateComponents = DateComponents()
         dateComponents.hour = hour
         dateComponents.minute = minute
+        
+        //測試鬧鐘用的
 //        let date = Date().addingTimeInterval(5)
 //        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
         

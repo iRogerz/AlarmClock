@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import UserNotifications
+
 
 class MainTabberViewController: UITabBarController {
     
@@ -17,7 +17,6 @@ class MainTabberViewController: UITabBarController {
         current.requestAuthorization(options: [.alert], completionHandler: { granted, error in
         })
         setupTabbar()
-
     }
     
     func setupTabbar(){

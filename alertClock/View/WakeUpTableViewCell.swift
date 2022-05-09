@@ -11,14 +11,9 @@ class WakeUpTableViewCell: UITableViewCell {
     
     
     //MARK: - UI
-    let wakeupLebal:UILabel = {
-        let wakeupLebal = UILabel()
-        wakeupLebal.text = "沒有鬧鐘"
-        return wakeupLebal
-    }()
     
     let settingButton:UIButton = {
-        let settingButton = UIButton()
+        let settingButton = UIButton(frame: .zero)
         settingButton.setTitle("setting", for: .normal)
         settingButton.setTitleColor(.orange, for: .normal)
         settingButton.backgroundColor = .systemGray6
@@ -43,14 +38,9 @@ class WakeUpTableViewCell: UITableViewCell {
     
     //MARK: - setupUI
     func setupUI(){
-        self.addSubview(wakeupLebal)
+        textLabel?.textColor = .lightGray
         self.addSubview(settingButton)
-        
-        wakeupLebal.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(20)
-            make.bottom.equalTo(self).offset(-20)
-            make.leading.equalTo(self).offset(10)
-        }
+
         settingButton.snp.makeConstraints { make in
             make.centerY.equalTo(self)
             make.trailing.equalTo(self).offset(-10)

@@ -21,7 +21,9 @@ struct AlarmStore{
     init(){
         loadData()
     }
-    
+    mutating func isSwitch(_ index: Int,_ tableViewCellisOn:Bool){
+        alarms[index].isOn = tableViewCellisOn
+    }
     mutating func edit(_ alarmData:AlarmInfo,_ index: Int){
         alarms[index] = alarmData
     }

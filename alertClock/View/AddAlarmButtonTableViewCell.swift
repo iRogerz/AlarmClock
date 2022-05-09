@@ -43,4 +43,8 @@ class AddAlarmButtonTableViewCell: UITableViewCell {
             make.leading.equalTo(self).offset(14)
         }
     }
+    //    @objc func switchChanged(_ sender : UISwitch!){
+    //        print("table row switch Changed \(sender.tag)")
+    //        print("The switch is \(sender.isOn ? "ON" : "OFF")")
+    //    }
 }

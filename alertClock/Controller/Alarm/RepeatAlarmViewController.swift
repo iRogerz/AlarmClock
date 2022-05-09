@@ -9,12 +9,7 @@ import UIKit
 
 class RepeatAlarmViewController: UIViewController {
     
-    var selectDays:Set<Day> = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
+    var selectDays:Set<Day> = []
     
     //MARK: - UI
     let tableView:UITableView = {
@@ -77,7 +72,6 @@ extension RepeatAlarmViewController:UITableViewDataSource,UITableViewDelegate{
         }
         //點選時有動畫
         tableView.reloadRows(at: [indexPath], with: .automatic)
-//        print(alarm.selectDays)
     }
     
 }

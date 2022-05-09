@@ -6,16 +6,30 @@
 //
 
 import Foundation
+import UserNotifications
 
 struct AlarmInfo:Codable{
     
+//    let userNotification = UserNotification()
     var id = UUID()
     var date:Date = Date()
     var note:String = "Alarm"
     var noteLabel:String{
+        if repeatDay == "Never"{
+            return note
+        }
         return note + ", " + repeatDay
     }
     
+    var isOn: Bool = true{
+        didSet{
+            if isOn{
+                UserNotification.addNotificationRequest(alarm: self)
+            }else{
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            }
+        }
+    }
     var selectDays:Set<Day> = []
     
     var isEdit = false

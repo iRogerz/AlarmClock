@@ -14,7 +14,7 @@ class AddAlarmViewController: UIViewController {
             .days(alarm.repeatDay),
             .label(alarm.note),
             .sounds("None"),
-            .snooze(true)
+            .snooze(false)
         ]
     }
     
@@ -77,12 +77,11 @@ class AddAlarmViewController: UIViewController {
         self.view.addSubview(datePicker)
         self.view.addSubview(tableView)
         
-        
         datePicker.snp.makeConstraints { make in
             make.top.equalTo(view).offset(48)
             make.width.equalTo(view)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(18)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
@@ -109,13 +108,11 @@ class AddAlarmViewController: UIViewController {
     
     @objc func saveButton(){
         alarm.date = datePicker.date
+        UserNotification.addNotificationRequest(alarm: alarm)
         saveAlarmDataDelegate?.saveAlarmInfo(alarmData: alarm, index: tempIndexRow)
         self.dismiss(animated: true)
     }
-    //    @objc func switchChanged(_ sender : UISwitch!){
-    //        print("table row switch Changed \(sender.tag)")
-    //        print("The switch is \(sender.isOn ? "ON" : "OFF")")
-    //    }
+
     
 }
 
@@ -170,6 +167,8 @@ extension AddAlarmViewController:UITableViewDataSource, UITableViewDelegate{
             labelVC.textField.text = alarm.note
             labelVC.labelDelegate = self
             self.navigationController?.pushViewController(labelVC, animated: true)
+//        case .sounds:
+//            
         default:
             break
         }
@@ -219,6 +218,8 @@ extension AddAlarmViewController {
             }
         }
     }
+    
+    
     
 }
 
