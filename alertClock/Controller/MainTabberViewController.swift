@@ -7,15 +7,13 @@
 
 import UIKit
 import SnapKit
+import AudioToolbox
 
 
 class MainTabberViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let current = UNUserNotificationCenter.current()
-        current.requestAuthorization(options: [.alert], completionHandler: { granted, error in
-        })
         setupTabbar()
     }
     

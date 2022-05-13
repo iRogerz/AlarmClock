@@ -28,6 +28,7 @@ class AlarmViewController: UIViewController{
     //MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         alarmTableView.dataSource = self
         alarmTableView.delegate = self
         setupNavigation()

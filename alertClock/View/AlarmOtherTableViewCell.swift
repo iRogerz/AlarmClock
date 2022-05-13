@@ -45,18 +45,14 @@ class AlarmOtherTableViewCell: UITableViewCell {
     }
     
     @objc func switchChanged(_ sender : UISwitch){
-//        let current = UNUserNotificationCenter.current()
         callBackSwitchState?(sender.isOn)
 //        print("table row switch Changed \(sender.tag)")
-//        if sender.isOn{
-//            textLabel?.textColor = .white
-//            detailTextLabel?.textColor = .white
-//            userNotification.addNotificationRequest(alarm: alarm)
-//        }else{
-//            textLabel?.textColor = .lightGray
-//            detailTextLabel?.textColor = .lightGray
-//            current.removeAllPendingNotificationRequests()
-//        }
-
+        if sender.isOn{
+            textLabel?.textColor = .white
+            detailTextLabel?.textColor = .white
+        }else{
+            textLabel?.textColor = .lightGray
+            detailTextLabel?.textColor = .lightGray
+        }
     }
 }

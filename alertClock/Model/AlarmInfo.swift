@@ -30,6 +30,7 @@ struct AlarmInfo:Codable{
             }
         }
     }
+    
     var selectDays:Set<Day> = []
     
     var isEdit = false

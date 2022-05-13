@@ -53,6 +53,7 @@ class AlarmLabelViewController: UIViewController,UITextFieldDelegate {
     func setupUI(){
         
         navigationController?.navigationBar.tintColor = .orange
+        
         self.title = "Lebal"
         view.addSubview(textField)
         textField.snp.makeConstraints { make in
@@ -64,7 +65,7 @@ class AlarmLabelViewController: UIViewController,UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        navigationController?.popViewController(animated: true)
         return true
     }
 }
