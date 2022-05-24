@@ -15,5 +15,5 @@ This project is practicing to make an IOS native alarm-clock.
 
 ## Demo
 
-![](https://imgur.com/sxhsHnZ)
+![](demo/demo.gif)
 
