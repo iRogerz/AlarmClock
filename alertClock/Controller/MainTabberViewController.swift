@@ -24,7 +24,7 @@ class MainTabberViewController: UITabBarController {
         let stopWatchNC = UINavigationController(rootViewController: StopWatchViewController())
         let timerNC = UINavigationController(rootViewController: TimerViewController())
         
-        //設定tabbar上的文字
+        //設定tabbar上的圖案
         worldClockNC.tabBarItem.image = UIImage(systemName: "network")
         alarmNC.tabBarItem.image = UIImage(systemName: "alarm.fill")
         stopWatchNC.tabBarItem.image = UIImage(systemName: "stopwatch.fill")

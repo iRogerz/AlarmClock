@@ -29,6 +29,7 @@ struct AlarmStore{
     }
     
     mutating func remove(_ index:Int){
+        alarms[index].isOn = false
         alarms.remove(at: index)
     }
     

@@ -11,32 +11,40 @@ import AVFoundation
 
 
 class UserNotification{
-    var contentHandler: ((UNNotificationContent) -> Void)?
     
-    static func addNotificationRequest(alarm: AlarmInfo) {
-        
-        let current = UNUserNotificationCenter.current()
-        //        current.removeAllPendingNotificationRequests()
-        let content = UNMutableNotificationContent()
+    static let shared = UserNotification()
+    
+    let current = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
+    
+    func addNotificationRequest(alarm: AlarmInfo) {
+//        current.removeAllPendingNotificationRequests()
         content.title = "Clock"
         content.subtitle = "Alarm"
         content.categoryIdentifier = "alarm"
         content.sound = UNNotificationSound(named: UNNotificationSoundName("123.wav"))
-        //        content.sound = UNNotificationSound.default
         
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: alarm.date)
         let minute = calendar.component(.minute, from: alarm.date)
+        
         var dateComponents = DateComponents()
         dateComponents.hour = hour
         dateComponents.minute = minute
         
-        //測試鬧鐘用的
-        //        let date = Date().addingTimeInterval(7)
-        //        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
-        
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        if alarm.selectDays.isEmpty {
+            triggerRequest(dateComponents: dateComponents, alarm: alarm, isRepeat: false)
+        } else {
+            let weekdays = alarm.selectDays.map { $0.componentWeekday }
+            weekdays.forEach { weekDay in
+                dateComponents.weekday = weekDay
+                triggerRequest(dateComponents: dateComponents, alarm: alarm)
+            }
+        }
+    }
+    
+    func triggerRequest(dateComponents: DateComponents, alarm: AlarmInfo, isRepeat: Bool = true) {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isRepeat)
         let request = UNNotificationRequest(identifier: alarm.id.uuidString, content: content, trigger: trigger)
         current.add(request) { error in
             if(error == nil){
@@ -46,24 +54,7 @@ class UserNotification{
             }
         }
     }
-    
-//    static func addNotificationRequest(alarm: AlarmInfo){
-//        addNotificationRequest(title: alarm.note, subTitle: "", id: alarm.id.uuidString)
-//    }
+
 }
 
 
-extension AppDelegate:UNUserNotificationCenterDelegate{
-    //app在前台也會通知
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        completionHandler([.sound, .badge, .banner])
-    }
-    
-    //點選通知完成後會發生的事
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        print("did tap notification")
-        completionHandler()
-    }
-}

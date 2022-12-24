@@ -17,7 +17,7 @@ class AlarmViewController: UIViewController{
     }
     
     //MARK: - UI
-    let alarmTableView:UITableView = {
+    let alarmTableView: UITableView = {
         let myTable = UITableView(frame: .zero, style: .grouped)
         myTable.separatorStyle = .singleLine
         myTable.register(WakeUpTableViewCell.self, forCellReuseIdentifier: "wakeup")
@@ -43,10 +43,8 @@ class AlarmViewController: UIViewController{
     
     //MARK: - setLayouts
     func setLayouts(){
-        
         alarmTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            //            make.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
         }
     }
     
@@ -103,36 +101,23 @@ extension AlarmViewController:UITableViewDataSource{
             
             cell.textLabel?.text = alarm.date.toString(format: "HH:mm")
             cell.detailTextLabel?.text = alarm.noteLabel
-            cell.lightSwitch.isHidden = alarmTableView.isEditing ? true : false
             cell.lightSwitch.isOn = alarm.isOn
-            
+            cell.textLabel?.textColor = alarm.isOn ? .white : .darkGray
+            cell.detailTextLabel?.textColor = alarm.isOn ? .white : .darkGray
             cell.callBackSwitchState = {isOn in
                 self.alarmStore.isSwitch(indexPath.row, isOn)
             }
             return cell
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return AlarmSection.allCases.count
     }
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //        let item = AlarmSection.allCases[section]
-    //        let headerView = AlarmHeaderView()
-    //        switch item{
-    //        case .wakeup:
-    //            headerView.imageView.image = UIImage(systemName: "bed.double.fill")
-    //            headerView.headerViewLabel.text = "Sleep | Wake Up"
-    //            return headerView
-    //        case .other:
-    //            headerView.headerViewLabel.text = "Others"
-    //            return headerView
-    //        }
-    //
-    //    }
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let item = AlarmSection.allCases[section]
         switch item{
@@ -152,7 +137,7 @@ extension AlarmViewController:UITableViewDataSource{
     }
     //是否能使用edit編輯
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 1{ return true}
+        if indexPath.section == 1 { return true }
         return false
     }
     //刪除cell
@@ -166,7 +151,9 @@ extension AlarmViewController:UITableViewDataSource{
 
 extension AlarmViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1{
+        let item = AlarmSection.allCases[indexPath.section]
+        switch item{
+        case .other:
             alarmStore.isEdit = true
             let vc = AddAlarmViewController()
             vc.saveAlarmDataDelegate = self
@@ -177,6 +164,8 @@ extension AlarmViewController:UITableViewDelegate{
             present(addAlarmNC, animated: true, completion: nil)
             //取消select的狀態
             tableView.deselectRow(at: indexPath, animated: false)
+            
+        default: ()
         }
     }
 }
@@ -190,10 +179,6 @@ extension AlarmViewController:SaveAlarmInfoDelegate{
             alarmStore.edit(alarmData, index)
         }
     }
-}
-
-protocol SaveAlarmInfoDelegate:AnyObject{
-    func saveAlarmInfo(alarmData:AlarmInfo, index: Int)
 }
 
 

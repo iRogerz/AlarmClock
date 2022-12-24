@@ -9,9 +9,7 @@ import UIKit
 
 class WakeUpTableViewCell: UITableViewCell {
     
-    
     //MARK: - UI
-    
     let settingButton:UIButton = {
         let settingButton = UIButton(frame: .zero)
         settingButton.setTitle("setting", for: .normal)

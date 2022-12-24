@@ -8,9 +8,10 @@
 import Foundation
 import UserNotifications
 
+
+
 struct AlarmInfo:Codable{
     
-//    let userNotification = UserNotification()
     var id = UUID()
     var date:Date = Date()
     var note:String = "Alarm"
@@ -21,12 +22,14 @@ struct AlarmInfo:Codable{
         return note + ", " + repeatDay
     }
     
-    var isOn: Bool = true{
+    var isOn: Bool = true {
         didSet{
             if isOn{
-                UserNotification.addNotificationRequest(alarm: self)
+                UserNotification.shared.addNotificationRequest(alarm: self)
             }else{
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                // 刪除推播
+                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["\(self.id.uuidString)"])
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["\(self.id.uuidString)"])
             }
         }
     }
